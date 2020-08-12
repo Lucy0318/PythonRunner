@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<body bgcolor="#F4F4F4">
+    <p style="color: #555; padding: 3px 6px; font-size: .9em;">Hello {{user}},<br>
+    <br>Your test has been accepted and is now running on test bed: {{test_bed}}.<br>
+    An email notification will be sent to you upon test completion.</p>
+    <hr>
+    <p style="color: #555; padding: 3px 6px; font-size: .9em;">Test details:</p>
+    <table style="width: 90%; color: #555; padding: 3px 6px; font-size: .9em;" align="center">
+        {% for key, val in start_summary.items() %}
+        <tr><td style="width: 240px">{{ key }}:</td><td>{{ val }}</td></tr>
+        {% endfor %}
+    </table>
+    <!-- <hr>
+    <p style="color: #555; padding: 3px 6px; font-size: .9em;">Dut console log: 
+            <a href={{dut_log.Link}}">dut_log.Display</a>    
+          </p> -->
+</body>
+<hr>
+<body bgcolor="#F4F4F4">
+    <p style="color: #555; padding: 3px 6px; font-size: .9em;">Dut console log: 
+        <a href="{{ dut_log.Link }}" target="_blank">{{ dut_log.Display }}</a>
+    </p>
+</body>
+
+{% endblock %}

@@ -1,0 +1,407 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<html>
+<head>
+    <style>
+        @media screen and (min-width: 900px) {
+            .container {
+                width: 900px!important;
+            }
+        }
+    </style>
+</head>
+<body bgcolor="#FBFBFB" lang="EN-US" link="blue" vlink="purple">
+    <table class="container" align="center" width="100%" cellpadding="0" cellspacing="0" style="max-width: 900px; table-layout: fixed; margin: 0 auto;">
+        <tr>
+            <td width="100%" style="padding-top: 10px; padding-bottom: 10px;">
+                <table class="border" style="border-collapse: collapse; border-spacing: 0; font-size: 1px; line-height: 1px; background-color: #e9e9e9; Margin-left: auto; Margin-right: auto" width="100%">
+                    <tbody>
+                        <tr>
+                            <td style="padding: 0; vertical-align: top">&#8203;‹</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="background-color: #f2f2f2;">
+                    <tr>
+                        <td align="center">
+                            <table class="main-table" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="max-width: 900px; min-width: 740px;">
+                                <tr>
+                                    <td class="layouts-here" align="left">
+                                        <!-- Logo -->
+                                        <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td align="center" class="header-background-colour">
+                                                    <table class="container" width="900" align="center" cellpadding="0" cellspacing="0" border="0" style="background-color: #4d4d4d; width: 900px;">
+                                                        <tr>
+                                                            <td class="sp" height="25" style="font-size: 1px; line-height: 25px; height: 25px;">&nbsp;
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="logo" align="center" style="max-width: 900px; border-collapse: collapse; font-size: 0;">
+                                                                <a href="http://www.sonicwall.com" style="max-width: 900px; text-decoration: none;">
+                                                                    <img src="https://www.mysonicwall.com/Images/Email-White-Orange-SonicWall.png" width="240" alt="SonicWall" />
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="sp" height="20" style="font-size: 1px; line-height: 20px;">&nbsp;
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="sp" height="1" style="font-size: 1px; line-height: 1px; height: 1px;">&nbsp;
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%">
+                <table border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <tr>
+                        <td colspan="3" class="border" style="padding: 0; vertical-align: top; font-size: 1px; line-height: 1px; background-color: #e9e9e9; width: 1px">&#8203;</td>
+                    </tr>
+                    <tr>
+                        <td class="border" style="padding: 0; vertical-align: top; font-size: 1px; line-height: 1px; background-color: #e9e9e9; width: 1px">&#8203;</td>
+                        <td>
+                            <table style="width: 100%;">
+                                <tr style="background: white;">
+                                    <td style="background: white; padding-left: 10px; padding-right: 10px;">
+                                        <div>
+                                            <p style="line-height: 6.0pt;"><span style="font-size: 6.0pt">&nbsp; </span></p>
+                                        </div>
+                                        <h1 style="Margin-top: 0; color: #565656; font-weight: 700; font-size: 32px; Margin-bottom: 18px; font-family: sans-serif; line-height: 42px">QA Automation</h1>
+                                        <p style="Margin-top: 0; color: #565656; font-family: Georgia,serif; font-size: 16px; line-height: 25px; Margin-bottom: 24px; width: 100%">
+
+
+<h4>Your test {{ suite_name }} is completed on testbed {{ test_bed }}.</h4>
+<h4>Test Result Summary</h4>
+<blockquote>
+    <table style="color: #555; padding: 3px 6px; font-size: .9em; font-family: Georgia,serif; font-size: 12px;">
+        {% for row in res_summary %}
+        <tr>
+            <td style="width: 240px">{{ row.Name }}:</td>
+            <td style="color: Green; width: 100px">Pass: {{ row.Pass }}</td>
+            <td style="color: red; width: 100px">Fail: {{ row.Fail }}</td>
+            <td style="color: purple; width: 100px">Skip: {{ row.Skip }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Execution Summary</h4>
+<blockquote>
+    <table style="color: #555; padding: 3px 6px; font-size: .9em; font-family: Georgia,serif; font-size: 12px;">
+        {% for key, val in exec_summary.items() %}
+        <tr><td style="width: 240px">{{ key }}:</td><td>{{ val }}</td></tr>
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Logs</h4>
+<blockquote>
+    <table style="color: #555; padding: 3px 6px; font-size: .9em; font-family: Georgia,serif; font-size: 12px;">
+        {% for row in logs %}
+        <tr>
+            <td style="width: 240px">{{ row.Name }}:</td>
+            <td><a href="{{ row.Link }}" target="_blank" class="logs-link">{{ row.Display }}</a></td>
+        </tr>
+        </tr>
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Result Details</h4>
+<blockquote>
+  <style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:black;}
+    .tg td{font-family:Times New Roman, Times;font-size:15px;padding:10px 5px;border-style:solid;border-width:1px;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+    .tg th{font-family:Times New Roman, Times;font-size:17px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;word-break:normal;border-color:#aabcfe;color:white;background-color:#b9c9fe;}
+    .tg .tg-heading{background-color:#4d4d4d;text-align:center;vertical-align:top}
+    .tg .tg-passed-even{background-color:white;color:black;text-align:left;vertical-align:top;}
+    .tg .tg-passed-even a{color: black;}
+    .tg .tg-passed-odd{background-color:#eaeaea;color:black;text-align:left;vertical-align:top;}
+    .tg .tg-passed-odd a{color: black;}
+    .tg .tg-failed-even{background-color:white;color:red;text-align:left;vertical-align:top;}
+    .tg .tg-failed-even a{color:red;}
+    .tg .tg-failed-odd{background-color:#eaeaea;color:red;text-align:left;vertical-align:top;}
+    .tg .tg-failed-odd a{color:red;}
+    .tg .tg-skipped-even{background-color:white;color:grey;text-align:left;vertical-align:top;}
+    .tg .tg-skipped-even a{color:grey;}
+    .tg .tg-skipped-odd{background-color:#eaeaea;color:grey;text-align:left;vertical-align:top;}
+    .tg .tg-skipped-odd a{color:grey;}
+
+  </style>
+  <table class="tg">
+  <tr>
+    <th class="tg-heading">Type</th>
+    <th class="tg-heading">Name</th>
+    <th class="tg-heading">Status</th>
+    <th class="tg-heading">Start Time</th>
+    <th class="tg-heading">End Time</th>
+  </tr>
+
+        {% for row_item in test_details %}
+            {% if loop.index % 2 ==0 %}
+                {% if row_item.result == 'PASSED' %}
+                    <tr>
+                        <td class="tg-passed-even">{{ row_item.type }}</td>
+                        <td class="tg-passed-even"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title}}</a></td>
+                        <td class="tg-passed-even">{{ row_item.result }}</td>
+                        <td class="tg-passed-even">{{ row_item.starttime }}</td>
+                        <td class="tg-passed-even">{{ row_item.endtime }}</td>
+                    </tr>
+            {% elif row_item.result == 'FAILED' %}
+                <tr>
+                    <td class="tg-failed-even">{{ row_item.type }}</td>
+                    <td class="tg-failed-even"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title}}</a>
+                        <ul>
+                            {% for stage in row_item.failed_stage %}
+                                <li>{{ stage }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    {% if row_item.dts_jira_link == '' %}
+                        <td class="tg-failed-even">{{ row_item.result}}</td>
+                    {% else %}
+                        <td class="tg-failed-even"><a href="{{ row_item.dts_jira_link }}" target="_blank">{{ row_item.result}}</a></td>
+                    {% endif %}
+                    <td class="tg-failed-even">{{ row_item.starttime }}</td>
+                    <td class="tg-failed-even">{{ row_item.endtime }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="tg-skipped-even">{{ row_item.type }}</td>
+                    <td class="tg-skipped-even"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title }}</a></td>
+                    <td class="tg-skipped-even"><a href="{{ row_item.dts_jira_link }}" target="_blank">{{ row_item.result}}</a></td>
+                    <td class="tg-skipped-even">{{ row_item.starttime }}</td>
+                    <td class="tg-skipped-even">{{ row_item.endtime }}</td>
+                </tr>
+            {% endif %}
+        {% else %}
+            {% if row_item.result == 'PASSED' %}
+                <tr>
+                    <td class="tg-passed-odd">{{ row_item.type }}</td>
+                    <td class="tg-passed-odd"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title }}</a></td>
+                    <td class="tg-passed-odd">{{ row_item.result }}</td>
+                    <td class="tg-passed-odd">{{ row_item.starttime }}</td>
+                    <td class="tg-passed-odd">{{ row_item.endtime }}</td>
+                </tr>
+            {% elif row_item.result == 'FAILED' %}
+                <tr>
+                    <td class="tg-failed-odd">{{ row_item.type }}</td>
+                    <td class="tg-failed-odd"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title }}</a>
+                        <ul>
+                            {% for stage in row_item.failed_stage %}
+                                <li>{{ stage }}</li>
+                            {% endfor %}
+                        </ul>                
+                    </td>
+                    {% if row_item.dts_jira_link == '' %}
+                        <td class="tg-failed-even">{{ row_item.result}}</td>
+                    {% else %}
+                        <td class="tg-failed-even"><a href="{{ row_item.dts_jira_link }}" target="_blank">{{ row_item.result}}</a></td>
+                    {% endif %}
+                    <td class="tg-failed-odd">{{ row_item.starttime }}</td>
+                    <td class="tg-failed-odd">{{ row_item.endtime }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td class="tg-skipped-odd">{{ row_item.type }}</td>
+                    <td class="tg-skipped-odd"><a href="{{ row_item.log_link }}" target="_blank">{{ row_item.title }}</a></td>
+                    <td class="tg-skipped-odd"><a href="{{ row_item.dts_jira_link }}" target="_blank">{{ row_item.result }}</a></td>
+                    <td class="tg-skipped-odd">{{ row_item.starttime }}</td>
+                    <td class="tg-skipped-odd">{{ row_item.endtime }}</td>
+                </tr>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+   </table>
+</blockquote>
+</p>
+</td>
+</tr>
+<tr>
+<td class="border" style="padding: 0; vertical-align: top; font-size: 1px; line-height: 1px; background-color: #e9e9e9; width: 1px">&#8203;</td>
+</tr>
+<tr>
+<td style="background: #F7F7F7; padding-left: 10px; padding-right: 10px;">
+    <div>
+        <p style="line-height: 6.0pt;"><span style="font-size: 6.0pt">&nbsp; </span></p>
+    </div>
+    <p style="margin-bottom: .25in; line-height: 18.75pt;">
+        <strong>
+            <i><span style="font-family: Georgia,serif; color: #565656">Thank you,</span></i>
+        </strong>
+        <b><i><span style="font-family: Georgia,serif; color: #565656"><br>
+        <strong><span style="font-family: Georgia,serif;">SonicWall Automation Team.</span></strong></span></i></b></p>
+
+</td>
+</tr>
+</table>
+</td>
+<td class="border" style="padding: 0; vertical-align: top; font-size: 1px; line-height: 1px; background-color: #e9e9e9; width: 1px">&#8203;</td>
+</tr>
+<tr>
+<td colspan="3" class="border" style="padding: 0; vertical-align: top; font-size: 1px; line-height: 1px; background-color: #e9e9e9; width: 1px">&#8203;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<img src="http://www.google-analytics.com/collect?v=1&amp;tid=<GA-ID>&amp;cid=<USERNAME>&amp;t=event&amp;ec=MSW_Mails&amp;ea=EMAILSECREGISTRATION_EMAIL&amp;el=<USERNAME>&amp;cs=newsletter&cm=email">
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="max-width: 900px; margin-top: 0px; background-color: #f2f2f2;">
+<tr>
+<td align="center">
+<table class="main-table" width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="margin-top: 0px; max-width: 900px; min-width: 740px;">
+<tr>
+<td class="layouts-here" align="left">
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="full-image" style="border-collapse: collapse; font-size: 0;">
+<img src="https://www.mysonicwall.com/Images/Email-sonicwall-eagle.png" alt="" style="border: none; display: block;" width="900"/>
+</td>
+</tr>
+</table>
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="color-bg" align="center" style="background-color: #151515;">
+<table class="container" width="610" align="center" cellpadding="0" cellspacing="0" border="0" style="width: 900px;">
+<tr>
+<td class="sp" height="37" style="font-size: 1px; line-height: 37px;">&nbsp;
+
+</td>
+</tr>
+<tr>
+<td class="h3" style="font-family: 'Nunito', Arial, sans-serif; line-height: 1.2; font-size: 20px; font-weight: 400; color: #ffffff; text-align: center;">
+<span style="font-family: 'Nunito', Arial, sans-serif;">Follow Us</span>
+</td>
+</tr>
+<tr>
+<td class="sp" height="17" style="font-size: 1px; line-height: 17px;">&nbsp;
+
+</td>
+</tr>
+<tr>
+<td align="center">
+
+<table align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="icon" style="border-collapse: collapse; font-size: 0; padding: 0 7px;">
+<a href="https://www.facebook.com/SonicWall/" style="text-decoration: none;">
+<img width="30" src="https://www.mysonicwall.com/Images/Email-FaceBook.png" alt="Facebook" style="border: none; display: block;"/>
+</a>
+</td>
+<td class="icon" style="border-collapse: collapse; font-size: 0; padding: 0 7px;">
+<a href="https://twitter.com/SonicWALL" style="text-decoration: none;">
+<img width="30" src="https://www.mysonicwall.com/Images/Email-Twitter.png" alt="Twitter" style="border: none; display: block;"/>
+</a>
+</td>
+<td class="icon" style="border-collapse: collapse; font-size: 0; padding: 0 7px;">
+<a href="https://www.linkedin.com/company-beta/4926/" style="text-decoration: none;">
+<img width="30" src="https://www.mysonicwall.com/Images/Email-LinkedIn.png" alt="LinkedIn" style="border: none; display: block;"/>
+</a>
+</td>
+<td class="icon" style="border-collapse: collapse; font-size: 0; padding: 0 7px;">
+<a href="https://www.youtube.com/user/SonicWALLVideo" style="text-decoration: none;">
+<img width="30" src="https://www.mysonicwall.com/Images/Email-YouTube.png" alt="YouTube" style="border: none; display: block;"/>
+</a>
+</td>
+<td class="icon" style="border-collapse: collapse; font-size: 0; padding: 0 7px;">
+<a href="https://blog.sonicwall.com/" style="text-decoration: none;">
+<img width="30" src="https://www.mysonicwall.com/Images/Email-Blog.png" alt="Blog" style="border: none; display: block;"/>
+</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="sp" height="1" style="font-size: 1px; line-height: 1px; height: 1px;">&nbsp;
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table class="footer" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="color-bg" align="center" style="background-color: #151515; color: #ffffff;">
+<table class="container" align="center" width="610" cellpadding="0" cellspacing="0" border="0" style="width: 900px;">
+
+<tr>
+<td class="sp" height="24" style="font-size: 1px; line-height: 24px; color: #ffffff;">&nbsp;
+
+</td>
+</tr>
+<tr>
+<td height="40" style="color: #ffffff; height: 40px;">
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<th class="m-cell" width="300" align="left" style="font-weight: 400; padding: 0; vertical-align: top; width: 240px;">
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="text" style="color: #ffffff; font-family: 'Nunito', Arial, sans-serif; font-size: 14px; line-height: 22px;">
+<span style="font-family: 'Nunito', Arial, sans-serif;">Copyright &copy; 2020&nbsp;SonicWall</span>
+  </td>
+</tr>
+</table>
+</th>
+<th class="m-cell" width="10" style="font-weight: 400; padding: 0; vertical-align: top; width: 10px; line-height: 2px;">&nbsp;
+
+</th>
+<th class="m-cell" width="300" align="left" style="font-weight: 400; padding: 0; vertical-align: top; width: 300px;">
+
+<!-- Unsubscribe -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="text" style="color: #ffffff; font-family: 'Nunito', Arial, sans-serif; font-size: 14px; line-height: 22px; text-align: right;">
+<span style="font-family: 'Nunito', Arial, sans-serif;"><a style="color: #ff791a; text-decoration: none;" href="http://www.sonicwall.com">www.sonicwall.com</a></span>
+  </td>
+</tr>
+</table>
+</th>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="spacer" height="20" style="color: #ffffff; line-height: 20px;">&nbsp;
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+
+{% endblock %}

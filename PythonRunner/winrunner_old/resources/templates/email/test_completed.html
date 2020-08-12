@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h4>Your test {{ suite_name }} is completed on testbed {{ test_bed }}.</h4>
+<h4>Test Result Summary</h4>
+<blockquote>
+    <table style="color: #555; padding: 3px 6px; font-size: .9em;">
+        {% for row in res_summary %}
+        <tr>
+
+            <td style="width: 240px">{{ row.Name }}:</td>
+            <td style="color: Green; width: 100px">Pass: {{ row.Pass }}</td>
+            <td style="color: red; width: 100px">Fail: {{ row.Fail }}</td>
+            <td style="color: red; width: 100px">Skip: {{ row.Skip }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Execution Summary</h4>
+<blockquote>
+    <table style="color: #555; padding: 3px 6px; font-size: .9em;">
+        {% for key, val in exec_summary.items() %}
+        <tr><td style="width: 240px">{{ key }}:</td><td>{{ val }}</td></tr>
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Logs</h4>
+<blockquote>
+    <table style="color: #404040; padding: 3px 6px; font-size: .9em;" >
+        {% for row in logs %}
+        <tr>
+            <td style="width: 240px">{{ row.Name }}:</td>
+            <td><a href="{{ row.Link }}" target="_blank">{{ row.Display }}</a></td>
+        </tr>
+        <!-- </tr> -->
+        {% endfor %}
+    </table>
+</blockquote>
+<hr>
+<h4>Test Result Details</h4>
+<blockquote>
+  <style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:"black";}
+    .tg td{font-family:Times New Roman, Times;font-size:15px;padding:10px 5px;border-style:solid;border-width:1px;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+    .tg th{font-family:Times New Roman, Times;font-size:17px;font-weight:bold;padding:10px 5px;border-style:solid;border-width:1px;word-break:normal;border-color:#aabcfe;color:"white";background-color:#b9c9fe;}
+	.tg .tg-heading{background-color:#000080;text-align:center;vertical-align:top}
+	.tg .tg-passed-even{background-color:"white";color:"black";text-align:left;vertical-align:top;}
+	.tg .tg-passed-odd{background-color:#eaeaea;color:"black";text-align:left;vertical-align:top;}
+	.tg .tg-failed-even{background-color:"white";color:"red";text-align:left;vertical-align:top;}
+	.tg .tg-failed-odd{background-color:#eaeaea;color:"red";text-align:left;vertical-align:top;}
+
+  </style>
+  <table class="tg">
+      <tr>
+        <th class="tg-heading">Type</th>
+        <th class="tg-heading">Name</th>
+        <th class="tg-heading">Status</th>
+        <th class="tg-heading">Start Time</th>
+        <th class="tg-heading">End Time</th>
+      </tr>
+
+        {% for row_item in test_details %}
+          {% if loop.index % 2 ==0 %}
+
+
+        {% if row_item.result == 'PASSED' %}
+            <tr>
+                <td class="tg-passed-even">{{ row_item.type }}</td>
+                <td class="tg-passed-even">{{ row_item.filename}}</td>
+                <td class="tg-passed-even">{{ row_item.result }}</td>
+                <td class="tg-passed-even">{{ row_item.starttime }}</td>
+                <td class="tg-passed-even">{{ row_item.endtime }}</td>
+            </tr>
+         {% else %}
+             <tr>
+                <td class="tg-failed-even">{{ row_item.type }}</td>
+                <td class="tg-failed-even">{{ row_item.filename }}</td>
+                <td class="tg-failed-even">{{ row_item.result}}</td>
+                <td class="tg-failed-even">{{ row_item.starttime }}</td>
+                <td class="tg-failed-even">{{ row_item.endtime }}</td>
+             </tr>
+            {% endif %}
+            {% else %}
+            {% if row_item.result == 'PASSED' %}
+            <tr>
+                <td class="tg-passed-odd">{{ row_item.type }}</td>
+                <td class="tg-passed-odd">{{ row_item.filename }}</td>
+                <td class="tg-passed-odd">{{ row_item.result }}</td>
+                <td class="tg-passed-odd">{{ row_item.starttime }}</td>
+                <td class="tg-passed-odd">{{ row_item.endtime }}</td>
+            </tr>
+         {% else %}
+            <tr>
+                <td class="tg-failed-odd">{{ row_item.type }}</td>
+                <td class="tg-failed-odd">{{ row_item.filename }}</td>
+                <td class="tg-failed-odd">{{ row_item.result }}</td>
+                <td class="tg-failed-odd">{{ row_item.starttime }}</td>
+                <td class="tg-failed-odd">{{ row_item.endtime }}</td>
+            </tr>
+              {% endif %}
+             {% endif %}
+            {% endfor %}
+  </table>
+</blockquote>
+{% endblock %}
